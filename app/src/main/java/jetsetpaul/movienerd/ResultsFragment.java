@@ -69,4 +69,9 @@ public class ResultsFragment extends Fragment {
         }
         super.setArguments(args);
     }
+
+    public interface SubFilterClickListener {
+        public void onSubfilterClicked(String selectedParams);
+        void onShowResultsClicked();
+    }
 }
