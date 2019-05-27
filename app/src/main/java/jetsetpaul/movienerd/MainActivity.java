@@ -26,12 +26,13 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity implements FiltersFragment.OnFilterSelectedListener, SubFiltersFragment.SubFilterClickListener {
+public class MainActivity extends AppCompatActivity implements FiltersFragment.OnFilterSelectedListener, SubFiltersFragment.SubFilterClickListener,
+ResultsFragment.MovieResultsClickListener{
     public CardView mCardView;
     public static Parameters myParams;
     public Filter selectedFilter;
     static RecyclerView recyclerView;
-    static Movie_Results_Adapter movieResultsAdapter;
+    static ResultsAdapter movieResultsAdapter;
     static RecyclerView.LayoutManager mLayoutManager;
     static ArrayList<String> movieResultsList = new ArrayList<>();
 
@@ -140,6 +141,11 @@ public class MainActivity extends AppCompatActivity implements FiltersFragment.O
                 inputStream.close();
             }
         }
+    }
+
+    @Override
+    public void onResultClicked(String selectedMovieTitle) {
+
     }
 
     private static class DownloadUrlTask extends AsyncTask<String, Void, String> {

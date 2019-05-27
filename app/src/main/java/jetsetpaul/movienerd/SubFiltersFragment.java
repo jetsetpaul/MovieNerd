@@ -56,8 +56,10 @@ public class SubFiltersFragment extends Fragment {
         mAddFiltersButton.setVisibility(View.VISIBLE);
         mShowResultsButton.setVisibility(View.VISIBLE);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler);
+
         subfilterAdapter = new SubfilterAdapter(filter.getmSubFilters(), (SubFilterClickListener) getActivity());
         Log.d("TAGG", "onCreateView: "+filter.getmSubFilters().size());
+
         layoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(layoutManager);
         subfilterAdapter.setList(filter.getmSubFilters());

@@ -36,7 +36,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mFilter.setText(mainMenuOptions.get(position).getmCategory());
-//        holder.bind(mainMenuOptions.get(position).getmCategory().toString(), (AdapterView.OnItemClickListener) listener);
     }
 
     @Override

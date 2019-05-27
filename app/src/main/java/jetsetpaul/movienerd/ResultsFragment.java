@@ -1,5 +1,6 @@
 package jetsetpaul.movienerd;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -21,9 +22,23 @@ import java.util.ArrayList;
  */
 public class ResultsFragment extends Fragment {
     private RecyclerView mRecyclerView;
-    Movie_Results_Adapter results_adapter;
+    ResultsAdapter results_adapter;
     ArrayList<Movie> movieList;
-    public ResultsFragment(){
+    MovieResultsClickListener listener;
+    Context mContext;
+
+    public ResultsFragment() {
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        this.mContext = context;
+        if(mContext instanceof MovieResultsClickListener){
+            listener = (MovieResultsClickListener) mContext;
+        } else {
+            Log.d("TAGG", "Something's not right");
+        }
+        super.onAttach(context);
     }
 
     @Nullable
@@ -32,7 +47,7 @@ public class ResultsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_layout_1, container, false);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler);
         mRecyclerView.setVisibility(View.VISIBLE);
-        results_adapter = new Movie_Results_Adapter(movieList);
+        results_adapter = new ResultsAdapter(movieList, (MovieResultsClickListener) getActivity());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(results_adapter);
@@ -43,9 +58,9 @@ public class ResultsFragment extends Fragment {
     public void parseJson(String jsonToParse) throws JSONException {
 
 
-        JSONObject responseObject= new JSONObject(jsonToParse);
+        JSONObject responseObject = new JSONObject(jsonToParse);
         JSONArray resultsArray = responseObject.getJSONArray("results");
-        for(int i = 0; i < resultsArray.length(); i++){
+        for (int i = 0; i < resultsArray.length(); i++) {
             JSONObject movie = resultsArray.getJSONObject(i);
             String movieName = movie.getString("title");
             String movieReleaseDate = movie.getString("release_date");
@@ -70,8 +85,7 @@ public class ResultsFragment extends Fragment {
         super.setArguments(args);
     }
 
-    public interface SubFilterClickListener {
-        public void onSubfilterClicked(String selectedParams);
-        void onShowResultsClicked();
+    public interface MovieResultsClickListener {
+        void onResultClicked(String selectedMovieTitle);
     }
 }

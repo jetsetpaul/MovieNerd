@@ -22,7 +22,6 @@ public class SubfilterAdapter extends RecyclerView.Adapter<SubfilterAdapter.View
     Activity mActivity;
     MenuAdapter mainAdapter;
     SubFiltersFragment.SubFilterClickListener listener;
-//    SubFiltersFragment.OnItemClickListener listener;
 
 
     public SubfilterAdapter(ArrayList<String> mSubfilters, SubFiltersFragment.SubFilterClickListener listener){
